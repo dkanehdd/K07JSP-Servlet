@@ -4,10 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.util.HashMap;
+/*
+DAO(Data Access Objeck)
+	: 데이터베이스의 Data에 접근하기위한 객체이다.
+	DB접근을 위한 로직으로 주로 구성된다. MVC패턴에서는
+	M(Model)에 해당한다.
+ */
+import java.util.Map;
 public class MemberDAO {
 	
-	Connection con;
+	Connection con;//커넥션 객체를 멤버변수로 설정하여 공유
 	PreparedStatement psmt;
 	ResultSet rs;
 	//기본생성자를 통한 DB연결
@@ -32,6 +39,7 @@ public class MemberDAO {
 			Class.forName(driver);
 			String id= "kosmo";
 			String pw = "1234";
+			//DB에 연결된 정보를 멤버변수에 저장
 			con = DriverManager.getConnection(url, id, pw);
 			System.out.println("DB연결성공(인자생성자)");
 		}
@@ -51,6 +59,7 @@ public class MemberDAO {
 		
 		try {
 			//prepare객체를 통해 쿼리문을 전송한다.
+			//생성자에서 연결정보를 저장한 커넥션 객체를 사용함.
 			psmt = con.prepareStatement(sql);
 			//쿼리문의 인파라미터 설정(DB의 인덱스는 1부터시작)
 			psmt.setString(1, id);
@@ -73,5 +82,69 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return isFlag;
+	}
+	//로그인방법2 : 회원인증후 MemberDTO객체에 회원정보를 저장한 후 JSP쪽으로 반환.
+	public MemberDTO getMemberDTO(String uid, String upass) {
+		//회원정보 저장을 위해 DTO객체 생성
+		MemberDTO dto = new MemberDTO();
+		//회원정보를 가져오기 위한 쿼리문 작성
+		String query = "SELECT id, pass, name FROM member"
+				+ "	WHERE id=? and pass=?";
+		
+		try {
+			//prepare객체생성
+			psmt = con.prepareStatement(query);
+			//인파라미터 설정
+			psmt.setString(1, uid);
+			psmt.setString(2, upass);
+			//쿼리실행
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				//결과가 있다면 DTO객체에 정보저장
+				dto.setId(rs.getString("id"));
+				dto.setPass(rs.getString("pass"));
+				dto.setName(rs.getString(3));
+			}
+			else {
+				System.out.println("결과셋이 없습니다.");
+			}
+		}
+		catch (Exception e) {
+			System.out.println("getMemberDTO오류");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	//로그인방법3 : DTO객체 대신 Map컬렉션에 회원정보를 저장후 반환한다.
+	public Map<String, String> getMemberMap(String id, String pwd){
+		
+		//회원정보를 저장할 Map컬렉션 생성
+		Map<String, String> maps = new HashMap<String, String>();
+		
+		String query = "SELECT id, pass, name FROM member"
+				+ " where id=? and pass=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			psmt.setString(2, pwd);
+			rs = psmt.executeQuery();
+			
+			//회원정보가 있다면 put()을 통해 정보를 저장한다.
+			if(rs.next()) {
+				maps.put("id", rs.getString("id"));
+				maps.put("pass",rs.getString("pass"));
+				maps.put("name",rs.getString("name"));
+			}
+			else {
+				System.out.println("결과셋이 없습니다.");
+			}
+			
+		}
+		catch (Exception e) {
+			System.out.println("getMemberMap오류");
+			e.printStackTrace();
+		}
+		return maps;
 	}
 }
