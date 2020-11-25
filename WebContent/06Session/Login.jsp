@@ -46,7 +46,7 @@ if(session.getAttribute("USER_ID")==null){//로그인 전 상태
 	로그인 2단계 : LoginProcessDTO.jsp
 	로그인 3단계 : LoginProcessMap.jsp
 	 -->
-	<form action="LoginProcessMap.jsp" method="post" name="loginFrm"
+	<form action="LoginProcessDTO.jsp" method="post" name="loginFrm"
 		onsubmit="return loginValidate(this);">
 	<table border="1">
 		<tr>
