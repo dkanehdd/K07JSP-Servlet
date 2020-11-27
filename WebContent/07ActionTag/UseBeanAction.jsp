@@ -29,7 +29,7 @@
 	<jsp:useBean id="member" class="model.MemberDTO" scope="request"/>
 	
 	<!-- 
-	userBean의 id속성과 setProperty의 name속성값이 서로 연결되어 빈을지정하게되고,
+	useBean의 id속성과 setProperty의 name속성값이 서로 연결되어 빈을지정하게되고,
 	setter()를 통해 값이 설정된다.
 	즉, DTO클래스에 setter()가 없으면 액션태그는 에러를 발생시킨다.
 	

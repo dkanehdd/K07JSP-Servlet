@@ -28,6 +28,12 @@
 				<input type="text" name="name" />
 			</td>
 		</tr>
+		<!-- <tr>
+			<td>나이</td>
+			<td>
+				<input type="text" name="age" />
+			</td>
+		</tr> -->
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="가입완료" />
