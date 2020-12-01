@@ -22,8 +22,19 @@ BbsDAO dao = new BbsDAO(application);
 //사용자의 입력값을 저장한 DTO객체를 DAO로 전달후 insert처리
 int affected = dao.insertWrite(dto);
 
+/*
+테스트데이터가 필요한 경우 아래 for문을 사용 할것 100개 한번에 입력
+int affected = 1;
+for(int i=1 ; i<=100 ; i++){
+	
+	dto.setTitle(title+" "+i+"번째 게시물");
+	dto.setContent(content+" "+i+"번째 게시물");
+	affected = dao.insertWrite(dto);
+}
+*/
 if(affected==1){
 	//글쓰기에 성공했을때
+	//새로운 게시물이 생성됬는지 확인하기위해 리스트의 첫번째페이지로 이동
 	response.sendRedirect("BoardList.jsp");
 }
 else{

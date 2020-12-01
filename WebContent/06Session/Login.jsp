@@ -1,19 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+//리퀘스트 내장객체를 이용해서 생성된 쿠키를 가져온다.
+Cookie[] cookies = request.getCookies();
+//쿠키값을 저장할 변수
+String save="";
+//생성된 쿠키가 존재한다면 로그인 아이디와 아디디저장에 관련된값이 있는지 확인한다.
+if(cookies!=null){
+	for(Cookie ck : cookies){
+		if(ck.getName().equals("SaveId")){
+			//아이디저장에 관련된값이 있는지 확인
+			save = ck.getValue();
+			System.out.println("save="+save);
+		}
+	}
+}
+%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
+<html lang="en">
+<jsp:include page="../common/boardHead.jsp"/>
 <body>
-
-<%@ include file="../common/CommonLink.jsp" %>
-
+<div class="container">
+<div class="row">		
+	<jsp:include page="../common/boardTop.jsp"/>
+</div>
 <h2>로그인 페이지</h2>
 
 <span style="color:red; font-size:1.5em;">		
@@ -48,16 +58,23 @@ if(session.getAttribute("USER_ID")==null){//로그인 전 상태
 	 -->
 	<form action="LoginProcessMap.jsp" method="post" name="loginFrm"
 		onsubmit="return loginValidate(this);">
-	<table border="1">
+	
+	
+	<table class="table">
 		<tr>
 			<td>아이디</td>
 			<td> 
-				<input type="text" name="user_id" tabindex="1" />
+				<input type="text" name="user_id" tabindex="1" 
+				value="<%=(save.length()==0)?"":save%>"/>
 			</td>
+			<td><input type="checkbox" name="id_save" tabindex="3" 
+				<% if(save.length()!=0){ %>
+						checked="checked"
+				<%} %>/>아이디저장</td>
 		</tr>
 		<tr>
 			<td>패스워드</td>
-			<td>
+			<td colspan="2">
 				<input type="password" name="user_pw" tabindex="2" />
 			</td>			
 		</tr>
@@ -90,6 +107,7 @@ if(session.getAttribute("USER_ID")==null){//로그인 전 상태
 		</tr>
 	</table>
 <% } %>
+</div>
 </body>
 
 </html>

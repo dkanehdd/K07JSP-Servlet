@@ -1,3 +1,4 @@
+<%@page import="util.CookieUtil"%>
 <%@page import="java.util.Map"%>
 <%@page import="model.MemberDTO"%>
 <%@page import="model.MemberDAO"%>
@@ -7,7 +8,7 @@
 //폼값받기
 String id = request.getParameter("user_id");
 String pw = request.getParameter("user_pw");
-
+String id_save = request.getParameter("id_save");
 //web.xml에 저장된 컨텍스트 초기화 파라미터 가져옴
 String drv = application.getInitParameter("JDBCDriver");
 String url = application.getInitParameter("ConnectionURL");
@@ -23,6 +24,15 @@ if(memberMap.get("id")!=null){
 	session.setAttribute("USER_PW", memberMap.get("pass"));
 	session.setAttribute("USER_NAME", memberMap.get("name"));
 	//로그인 페이지로 이동
+	if(id_save==null){
+		//체크해제하면 쿠키를 삭제한다.
+		CookieUtil.makeCookie(request, response, "SaveId", "", 0);
+	}
+	else{
+		//체크하면 쿠키를 생성한다.
+		CookieUtil.makeCookie(request, response, "SaveId", id,
+				60*60*24);
+	}
 	response.sendRedirect("Login.jsp");
 }
 else{

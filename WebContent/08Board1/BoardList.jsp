@@ -1,3 +1,4 @@
+<%@page import="util.PagingUtil"%>
 <%@page import="model.BbsDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -24,6 +25,9 @@ BbsDAO dao = new BbsDAO(drv, url);
 */
 Map<String, Object> param = new HashMap<String, Object>();
 
+//Get방식으로 전달되는 폼값을 페이지번호로 넘겨주기위해 문자열로 저장
+String queryStr = "";
+
 //검색어가 입력된 경우 전송된 폼값을 받아 Map에 저장한다.
 String searchColumn = request.getParameter("searchColumn");
 String searchWord = request.getParameter("searchWord");
@@ -34,11 +38,48 @@ if(searchWord!=null){
 	*/
 	param.put("Column", searchColumn);
 	param.put("Word", searchWord);
+	
+	//검색어가 있을때 쿼리스트링을 만들어준다.
+	queryStr += "searchColumn="+searchColumn
+			+"&searchWord="+searchWord+"&";
 }
 //board테이블에 입력된 전체 레코드 갯수를 카운트하여 반환
-int totalRecordCount = dao.getTotalRecordCount(param);
+//int totalRecordCount = dao.getTotalRecordCount(param); join X
+int totalRecordCount = dao.getTotalRecordCountSearch(param);// join O
+
+/*********** 페이지처리를 위한 코드 추가 start ************/
+//한페이지에 출력할 레코드의 갯수 : 10
+int pageSize = Integer.parseInt(application.getInitParameter("PAGE_SIZE"));
+//한 블럭당 출력할 페이지의 갯수 : 5
+int blockPage = Integer.parseInt(application.getInitParameter("BLOCK_PAGE"));
+
+/*
+전체페이지수 계산 => 게시물이 108개라 가정하면 108/10=10.8 => ceil(10.8)=11;
+*/
+int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
+// System.out.println(totalPage);
+
+/*
+현제페이지번호 : 파라미터가 없을때는 무조건 1페이지로 지정하고,
+	값이 있을때는 해당값을 얻어와서 숫자로 변경한다.
+	즉 리스트에 처음진입했을때는 1페이지가 된다.
+*/
+int nowPage = (request.getParameter("nowPage")==null ||
+	request.getParameter("nowPage").equals("")) ?
+			1 : Integer.parseInt(request.getParameter("nowPage"));
+
+//한페이지에 출력할 게시물의 범위를 결정한다. 계산식은 교안을 참조한다.(1~10, 11~20...)
+int start = (nowPage-1)*pageSize+1;
+int end = nowPage*pageSize;
+//게시물의 범위를 Map컬렉션에 저장하고 DAO로 전달한다.
+param.put("start", start);
+param.put("end", end);
+/*********** 페이지처리를 위한 코드 추가 end ************/
+
 //board테이블의 레코드를 select하여 결과셋을 List컬렉션으로 반환
-List<BbsDTO> bbs = dao.selectList(param);
+//List<BbsDTO> bbs = dao.selectList(param);//페이지처리 X
+//List<BbsDTO> bbs = dao.selectListPage(param);//페이지처리 O
+List<BbsDTO> bbs = dao.selectListPageSearch(param);//페이지처리 O
 //DB자원해제
 dao.close();
 %>
@@ -67,8 +108,12 @@ dao.close();
 							<option value="content" 
 							<%=(searchColumn!=null && searchColumn.equals("content")) ?
 									"selected":""%>>내용</option>
-							<!-- 이름으로 검색하려면 Join이 필요하므로 차후 업데이트 예정 -->
-							<!-- <option value="id">작성자</option> -->
+							<option value="name"
+							<%=(searchColumn!=null && searchColumn.equals("name")) ?
+									"selected":""%>>작성자</option>
+							<option value="b.id"
+							<%=(searchColumn!=null && searchColumn.equals("b.id")) ?
+									"selected":""%>>아이디</option>
 						</select>
 					</div>
 					<div class="input-group">
@@ -87,7 +132,7 @@ dao.close();
 				<colgroup>
 					<col width="60px"/>
 					<col width="*"/>
-					<col width="120px"/>
+					<col width="180px"/>
 					<col width="120px"/>
 					<col width="80px"/>
 					<!-- <col width="60px"/> -->
@@ -129,18 +174,32 @@ else{
 	for(BbsDTO dto : bbs){
 		/*
 		전체 레코드수를 이용하여 가상번호를 부여하고 반복씨 1씩 차감한다.
+		(페이지 처리 없을때의 방식)
 		*/
-		vNum = totalRecordCount --;
+// 		vNum = totalRecordCount --;
+		// 페이지 처리를 할때 가상번호 계산방법
+		vNum = totalRecordCount - (((nowPage-1) * pageSize) + countNum++);
+		
+		/*
+		전체게시물수 : 110개
+		페이지사이즈(web.xml에 PAGE_SIZE로 설정) : 10
+		현제페이지1일때
+			첫번째게시물 : 110 - (((1-1)*10)+0)= 110
+			두번째게시물 : 110 - (((1-1)*10)+1)= 109
+		현제페이지2일때
+			첫번째게시물 : 110 - (((2-1)*10)+0)= 100
+			두번째게시물 : 110 - (((2-1)*10)+1)= 99
+		*/
 %>
 				<!-- 리스트반복 -->
 				<tr>
 					<td class="text-center"><%=vNum %></td>
 					<td class="text-left">
-						<a href="BoardView.jsp?num=<%=dto.getNum()%>">
+						<a href="BoardView.jsp?num=<%=dto.getNum()%>&nowPage=<%=nowPage %>&<%=queryStr%>">
 							<%=dto.getTitle() %>
 						</a>
 					</td>
-					<td class="text-center"><%=dto.getId() %></td>
+					<td class="text-center"><%=dto.getName() %><br />(<%=dto.getId() %>)</td>
 					<td class="text-center"><%=dto.getPostdate() %></td>
 					<td class="text-center"><%=dto.getVisitcount() %></td>
 					<!-- <td class="text-center">
@@ -171,19 +230,26 @@ else{
 				<div class="col">
 					<!-- 페이지번호 부분 -->
 					<ul class="pagination justify-content-center">
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-double-left"></i></a></li>
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-left"></i></a></li>
-						<li class="page-item"><a href="#" class="page-link">1</a></li>		
-						<li class="page-item active"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>		
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-right"></i></a></li>
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-double-right"></i></a></li>
+					<!-- 매개변수설명 
+					totalRecordCount : 게시물의 전체갯수 
+					pageSize : 한페이지에 출력할 게시물의 갯수
+					blockPage : 한 블록에 표시할 페이지번호의 갯수
+					nowPage : 현제페이지 번호
+					"BoardList.jsp?" : 해당 게시판의 실행 파일 경로
+					 -->
+					<%=PagingUtil.pagingBS4(totalRecordCount, 
+					pageSize, blockPage, nowPage, "BoardList.jsp?"+queryStr) %>
+					
 					</ul>
-				</div>				
+				</div>
+								
 			</div>	
 		<!-- ### 게시판의 body 부분 end ### -->	
+			<%-- <div class="text-center">
+				<!-- 텍스트 기반의 페이지번호 출력하기 -->
+				<%=PagingUtil.pagingTxt(totalRecordCount, 
+					pageSize, blockPage, nowPage, "BoardList.jsp?"+queryStr) %>
+			</div> --%>
 		</div>
 	</div>
 	<div class="row border border-dark border-bottom-0 border-right-0 border-left-0"></div>
