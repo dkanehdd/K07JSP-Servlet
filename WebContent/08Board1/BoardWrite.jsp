@@ -4,6 +4,11 @@
     pageEncoding="UTF-8"%>
 <%-- 글작성 페이지 진입전 로그인 체크하기 --%>
 <%@ include file = "../common/isLogin.jsp" %>
+<%
+int nowPage = (request.getParameter("nowPage")==null ||
+request.getParameter("nowPage").equals("")) ?
+		1 : Integer.parseInt(request.getParameter("nowPage"));
+%>
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="../common/boardHead.jsp"/>
@@ -88,7 +93,7 @@
 					<div class="col text-right">
 						<button type="submit" class="btn btn-danger">전송하기</button>
 						<button type="reset" class="btn btn-dark">Reset</button>
-						<button type="button" class="btn btn-warning" onclick="location.href='BoardList.jsp';">리스트보기</button>
+						<button type="button" class="btn btn-warning" onclick="location.href='BoardList.jsp?nowPage=<%=nowPage%>';">리스트보기</button>
 					</div>
 				</div>
 			</form>

@@ -18,6 +18,10 @@ if(searchWord!=null){
 }
 String nowPage = request.getParameter("nowPage");
 queryStr += "&nowPage="+nowPage;
+String sortColumn = request.getParameter("sortColumn");
+if(sortColumn!=null){
+	queryStr += "&sortColumn="+sortColumn+"&";
+}
 //파라미터로 전송된 게시물의 일련번호를 받음
 String num = request.getParameter("num");
 
@@ -97,7 +101,7 @@ dao.close();
 					반드시 게시물의 일련번호(PK)가 파라미터로 전달되어야 한다.
 					수정은 상세보기+글쓰기가 포함된 형태로 구현해야 한다. -->
 					<button type="button" class="btn btn-secondary"
-						onclick="location.href='BoardEdit.jsp?num=<%=dto.getNum()%>';">수정하기</button>
+						onclick="location.href='BoardEdit.jsp?num=<%=dto.getNum()%>&<%=queryStr%>';">수정하기</button>
 					<button type="button" class="btn btn-success"
 						onclick="isDelete();">삭제하기</button>
 				<%} %>

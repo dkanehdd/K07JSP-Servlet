@@ -1,4 +1,4 @@
-333<%@page import="util.JavascriptUtil"%>
+<%@page import="util.JavascriptUtil"%>
 <%@page import="model.BbsDTO"%>
 <%@page import="model.BbsDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,7 +9,9 @@
 //파라미터로 전송된 게시물의 일련번호를 받음
 String num = request.getParameter("num");
 BbsDAO dao = new BbsDAO(application);
-
+int nowPage = (request.getParameter("nowPage")==null ||
+request.getParameter("nowPage").equals("")) ?
+		1 : Integer.parseInt(request.getParameter("nowPage"));
 //본인이 작성한 게시물이므로 조회수 증가는 의미 없엉.
 
 //일련번호에 해당하는 게시물을 DTO객체로 반환함.
@@ -56,6 +58,7 @@ dao.close();
 			<form name="writeFrm" method="post" action="EditProc.jsp" 
 				onsubmit="return checkValidate(this);">
 				<input type="hidden" name="num" value="<%=num %>" />
+				<input type="hidden" name="nowPage" value="<%=nowPage %>" />
 			<div class="row mt-3 mr-1">
 				<table class="table table-bordered table-striped">
 				<!-- 해당 게시물의 일련번호를 전송해야 수정이 가능하다.

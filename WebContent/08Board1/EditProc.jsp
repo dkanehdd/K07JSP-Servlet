@@ -11,7 +11,9 @@ request.setCharacterEncoding("UTF-8");
 String num = request.getParameter("num");
 String title = request.getParameter("title");
 String content = request.getParameter("content");
-
+int nowPage = (request.getParameter("nowPage")==null ||
+request.getParameter("nowPage").equals("")) ?
+		1 : Integer.parseInt(request.getParameter("nowPage"));
 //DTO객체 생성
 BbsDTO dto = new BbsDTO();
 dto.setNum(num);//특정게시물에 대한 수정이므로 일련번호 추가됨. WHERE절에 사용 
@@ -28,7 +30,7 @@ if(affected==1){
 	기존의 게시물을 수정하였으므로, 수정된 내용을 확인하기 위해
 	상세보기 페이지로 이동해야한다.
 	*/
-	response.sendRedirect("BoardView.jsp?num="+dto.getNum());
+	response.sendRedirect("BoardView.jsp?num="+dto.getNum()+"&nowPage="+nowPage);
 }
 else{
 %>
