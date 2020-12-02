@@ -307,17 +307,23 @@ public class BbsDAO {
 			query += " WHERE " + map.get("Column") + " LIKE '%"
 					+ map.get("Word") + "%'";
 		}
-		query += " Order By num desc ) Tb ) "
+		query += " Order By ? desc ) Tb ) "
 				+ " WHERE rNum BETWEEN ? AND ?";
 //		System.out.println(query);
 		try {
 			psmt= con.prepareStatement(query);
 			
-			psmt.setString(1, map.get("start").toString());
-			psmt.setString(2, map.get("end").toString());
-			
+			psmt.setString(2, map.get("start").toString());
+			psmt.setString(3, map.get("end").toString());
+			if(map.get("Sort")!=null) {
+				psmt.setString(1, map.get("Sort").toString());
+				System.out.println(map.get("Sort").toString());
+			}
+			else {
+				psmt.setString(1, "num");
+			}
 			rs = psmt.executeQuery();
-
+			System.out.println(query);
 			while(rs.next()) {
 				BbsDTO dto = new BbsDTO();
 				//setter()를 통해 각각의 컬럼에 데이터 저장
@@ -352,9 +358,17 @@ public class BbsDAO {
 			query += " WHERE " + map.get("Column") + " LIKE '%"
 					+ map.get("Word") + "%'";
 		}
-		query += " ORDER By num DESC ) Tb ) "
+		query += " ORDER By ";
+		if(map.get("Sort")!=null) {
+			query += map.get("Sort").toString();
+		}
+		else {
+			query += " num ";
+		}
+				
+			query	+= "  DESC ) Tb ) "
 				+ " WHERE rNum BETWEEN ? AND ?";
-//		System.out.println(query);
+		System.out.println(query);
 		try {
 			psmt= con.prepareStatement(query);
 			

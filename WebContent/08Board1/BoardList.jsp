@@ -43,6 +43,11 @@ if(searchWord!=null){
 	queryStr += "searchColumn="+searchColumn
 			+"&searchWord="+searchWord+"&";
 }
+String sortColumn = request.getParameter("sortColumn");
+if(sortColumn!=null){
+	param.put("Sort", sortColumn);
+	queryStr += "&sortColumn="+sortColumn+"&";
+}
 //board테이블에 입력된 전체 레코드 갯수를 카운트하여 반환
 //int totalRecordCount = dao.getTotalRecordCount(param); join X
 int totalRecordCount = dao.getTotalRecordCountSearch(param);// join O
@@ -78,7 +83,7 @@ param.put("end", end);
 
 //board테이블의 레코드를 select하여 결과셋을 List컬렉션으로 반환
 //List<BbsDTO> bbs = dao.selectList(param);//페이지처리 X
-//List<BbsDTO> bbs = dao.selectListPage(param);//페이지처리 O
+// List<BbsDTO> bbs = dao.selectListPage(param);//페이지처리 O
 List<BbsDTO> bbs = dao.selectListPageSearch(param);//페이지처리 O
 //DB자원해제
 dao.close();
@@ -224,6 +229,17 @@ else{
 					<button type="button" class="btn btn-warning">리스트보기</button>
 					<button type="button" class="btn btn-danger">전송하기</button>
 					<button type="button" class="btn btn-dark">Reset</button> -->
+					
+				</div>
+				<div class="dropdown">
+					<button type="button" class="btn btn-basic dropdown-toggle" data-toggle="dropdown">
+					    정렬
+					</button>
+					<div class="dropdown-menu">
+					    <a class="dropdown-item" href="#">제목</a>
+					    <a class="dropdown-item" href="#">날짜</a>
+					    <a class="dropdown-item" href="BoardList.jsp?nowPage=<%=nowPage%>&sortColumn=visitcount">조회수</a>
+				  	</div>
 				</div>
 			</div>
 			<div class="row mt-3">
