@@ -23,7 +23,7 @@ BbsDAO dao = new BbsDAO(application);
 int affected = dao.insertWrite(dto);
 
 /*
-테스트데이터가 필요한 경우 아래 for문을 사용 할것 100개 한번에 입력
+//테스트데이터가 필요한 경우 아래 for문을 사용 할것 100개 한번에 입력
 int affected = 1;
 for(int i=1 ; i<=100 ; i++){
 	

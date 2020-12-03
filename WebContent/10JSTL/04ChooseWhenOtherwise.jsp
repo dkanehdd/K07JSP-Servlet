@@ -13,6 +13,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<!-- 
+	choose문
+		: if문과는 다르게 여러조건이 있는 경우 사용한다.
+		형식]
+			choose
+				when test="조건1"
+				when test='조건2'
+				otherwise
+	 -->
 	<h2>choose~when~otherwise 태그</h2>
 	
 	<c:set var="numVar" value="101"/>
@@ -36,9 +45,12 @@
 		수학 : <input type="text" name="math" /> <br />
 		<input type="submit" value="학점구하기" />
 	</form>
+	
+	<!-- 점수에 대한 입력값이 있을때만 화면에 결과 출력 -->
 	<c:if test="${not empty param.kor }">
+		<!-- 국영수의 평균값을 구해서 변수(avg)에 할당 -->
 		<c:set var="avg" value="${(param.kor+param.eng+param.math)/3 }"/>
-		귀하의 평균점수는 ${avg }입니다.
+		귀하의 평균점수는 ${avg }입니다. <br />
 		<c:choose>
 			<c:when test="${avg >= 90 }">A학점</c:when>
 			<c:when test="${avg ge 80 }">B학점</c:when>

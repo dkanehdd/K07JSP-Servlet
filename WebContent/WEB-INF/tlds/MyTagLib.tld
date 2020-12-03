@@ -33,24 +33,14 @@
   </function>
   
   <function>
-  	<!-- EL에서 사용할 메소드명 -->
     <name>getGender</name>
-    <!-- 패키지를 포함한 클래스의 풀 경로 -->
     <function-class>eltag.MyTagLib</function-class>
-    <!-- 호출할 메소드의 원형을 기술한다. 리턴타입과 매개변수는 
-	    해당 클래스의 패키지를 포함한 풀경로를 사용해야 한다. 
-	    단 기본자료형인 경우에는 자료형만 기술하면 된다. -->
     <function-signature>java.lang.String getGender(java.lang.String)</function-signature>
   </function>
   
    <function>
-  	<!-- EL에서 사용할 메소드명 -->
     <name>memberLogin</name>
-    <!-- 패키지를 포함한 클래스의 풀 경로 -->
     <function-class>eltag.MyTagLib</function-class>
-    <!-- 호출할 메소드의 원형을 기술한다. 리턴타입과 매개변수는 
-	    해당 클래스의 패키지를 포함한 풀경로를 사용해야 한다. 
-	    단 기본자료형인 경우에는 자료형만 기술하면 된다. -->
     <function-signature>boolean memberLogin(java.lang.String, java.lang.String,java.lang.String,java.lang.String )</function-signature>
   </function>
   

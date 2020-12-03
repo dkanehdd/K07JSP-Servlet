@@ -14,11 +14,27 @@
 <body>
 	<h2>일반 for문 형태의 forEach태그</h2>
 	
+	<!-- 
+	forEach태그의 첫번째 문법 : 일반 for문
+		형식] begin : 시작값
+			end : 종료값
+			step : 증가치
+			var : 반복시 사용할 변수
+	 -->
 	<h3>JSTL 및 EL로 Hn태그 출력하기</h3>
 	<c:forEach begin="1" end="6" var="i">
 		<h${i }>난 h${i }태그 입니다.</h${i }>
 	</c:forEach>
 	
+	<!-- 일반 for문에서의 varStatus속성
+	: 반복과 관련된 정보를 추상화한 클래스인 LoopTagStatus객체를
+	통해 정보를 반환한다.
+		count : 실제 반복횟수(1~마지막)
+		index : 변수 i의 변화하는 값
+		first : loop의 처음일때 true반환
+		last : loop의 마지막일때 true반환
+		current : 현재 loop의 변수값(var 속성에 지정된 변수)
+	 -->
 	<h3>varStatus속성 살펴보기</h3>
 	<c:forEach begin="3" end="5" var="i" varStatus="loop">
 		<h4>${loop.count }번째 반복입니다.</h4>
@@ -49,14 +65,42 @@
 	0 0 0 1 0
 	0 0 0 0 1
 	-->
-	<c:forEach begin="1" end="5" var="i">
-		<c:forEach begin="1" end="5" var="j">
-			<c:if test="${i!=j }">0&nbsp;</c:if>
-			<c:if test="${i==j }">1&nbsp;</c:if>
-		</c:forEach>
-		<br />
-	</c:forEach>
 	<h4>if문 사용하기</h4>
+	<table>
+	<c:forEach begin="1" end="5" var="i">
+		<tr>
+		<c:forEach begin="1" end="5" var="j">
+			<td style="background-color: skyblue; padding: 5px">
+			<c:if test="${i==j }" var="result">1</c:if>
+			<c:if test="${not result }">0</c:if>
+			</td>
+		</c:forEach>
+		</tr>
+	</c:forEach>
+	</table>
+	
+	<!-- 
+		JSTL사이에 HTML주석을 삽입해야 할때는 하나의 문장이
+		완전히 끝난 이후 삽입하도록 한다. choose와 when사이에
+		주석이 삽입되면 에러가 발생한다.
+	 -->
+	<h4>choose문 사용하기</h4>
+	<table>
+	<c:forEach begin="1" end="5" var="i">
+		<tr>
+		<c:forEach begin="1" end="5" var="j">
+			<td style="background-color: skyblue; padding: 5px">
+			<c:choose>
+				<%-- i와 j가 같을때 --%>
+				<c:when test="${i==j }">1</c:when>
+				<c:otherwise>0</c:otherwise>
+			</c:choose>
+			</td>
+		</c:forEach>
+		</tr>
+	</c:forEach>
+	</table>
+	
 	<h2>구구단 출력하기</h2>
 	<!-- 
 	시나리오] JSTL의 forEach문을 이용하여 구구단을 출력하시오.
@@ -66,12 +110,15 @@
 	<h3>JSTL로 출력하기</h3>
 	<table border="1" >
 	<c:forEach begin="1" end="9" var="i">
-		<c:if test="${i mod 2 == 1 }">
-			<tr onmouseover="style.color='red'" onmouseleave="style.color='black'">
-		</c:if>
-		<c:if test="${i mod 2 == 0 }">
-			<tr onmouseover="style.color='blue'" onmouseleave="style.color='black'">
-		</c:if>
+		<c:choose>
+			<c:when test="${i mod 2 ==0 }">
+				<c:set var="color" value="hotpink"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="color" value="yellowgreen"/>
+			</c:otherwise>
+		</c:choose>
+		<tr onmouseover="style.backgroundColor='${color}'" onmouseout="style.backgroundColor='white'">
 		<c:forEach begin="2" end="9" var="j">
 			<td>${j } * ${i } = ${i*j }</td>
 		</c:forEach>

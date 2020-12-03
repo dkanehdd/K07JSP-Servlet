@@ -12,12 +12,26 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<!-- 
+	if태그 
+	-JSTL의 if문은 시작태그와 종료태그를 통해서 조건을 판단한다.
+	-else문이 없기때문에 다중조건일때는 표현이 어렵다. 이때는 주로 choose문을 사용한다.
+	형식]
+		test : 조건
+		var : test의 조건을 반환받을 변수 지정
+		scope : 영역설정(거의 사용되지 않음)
+	-->
 	<h2>if태그</h2>
 	<c:set var="numVar" value="100"/>
 	<c:set var="strVar" value="JAVA"/>
 	
+	<!-- 
+		if(numVar%2==0) 와 동일한 조건으로, 해당 조건문은 
+		true를 반환하므로 태그 사이의 문장이 출력된다. 그리고
+		var속성에 지정된 result에 true가 저장된다.
+	 -->
 	<h3>JSTL의 if태그로 짝수/홀수 판단하기</h3>
-	<c:if test="${numVar mod 2 eq 1 }" var="result">
+	<c:if test="${numVar mod 2 eq 0 }" var="result">
 		${numVar }는 짝수입니다. <br />
 	</c:if>
 	\${result } : ${result } <br/>
@@ -25,14 +39,25 @@
 	<h3>위 if문을 EL식의 삼항식으로 표현</h3>
 	${numVar } : ${numVar mod 2 == 0 ? "는 짝수" : "는 홀수" }
 	
+	<!-- 
+		JSTL의 if문은 else가 없기때문에 참 or 거짓의 형태로 
+		구문을 만뜰때는 아래와같이 참의조건, 거짓의조건으로 
+		각각 블럭을 만들어 준다.
+	 -->
 	<h3>문자열 비교</h3>
 	<c:if test="${JAVA eq '자바' }">
-		${strVar }는 자바다 <br />
+		${strVar }는 자바다 <br /><!-- 조건이 false이므로 출력되지 않음 -->
 	</c:if>
 	<c:if test="${JAVA ne '자바' }">
-		${strVar }는 자바가 아니다 <br />
+		${strVar }는 자바가 아니다 <br /><!-- 결과 출력됨 -->
 	</c:if>
 	
+	
+	<!-- 
+	-test속성에 EL식이 아닌 일반값이 들어가면 무조건 false를 반환한다.
+	-EL식이더라도 {} 양쪽에 공백이 들어가면 무조건  false를 반환한다.
+	-단, 일반식이라도  TRUE(true)인 경우에는 true를 반환한다.
+	 -->
 	<h2>if문 사용시 주의사항</h2>
 	<h3>항상 출력되거나 출력되지 않는 조건식</h3>
 	<c:if test="${true }">
@@ -54,7 +79,7 @@
 	\${result } : ${result } <br />
 	
 	<h3>EL식으로 조건판단시 {}양쪽에 공백이 있으면 무조건 false로 판단됨</h3>
-	<c:if test=" \${변수 eq 값 } " var="result">
+	<c:if test="${true }" var="result">
 		빈 공백이 있어서 무조건 false처리됨
 	</c:if>
 	\${result } : ${result } <br />
@@ -74,12 +99,23 @@
 		<br />
 		<input type="submit" value="로그인" />
 	</form>	
-	<c:if test="${param.user=='kosmo' && param.pass=='1234' }">
-		kosmo님 하이룽~
-	</c:if>
-	<c:if test="${param.user!='kosmo' || param.pass!='1234' }">
-		아이디와 비번을 확인하세요
-	</c:if>
 	
+	<!-- 전송된 아이디가 있을때만 아래 if문이 출력됨 -->
+	<c:if test="${not empty param.user }">
+		전송된 아이디 : ${param.user } <br />
+		전송된 아이디 : ${param.pass } <br />
+		<!-- 
+		첫번째 if문에서의 결과에 따라 두번째 if문은 반대의 결과를 가지게되는
+		구조로 작성되었다. 즉 loginResult가 true가 된다면 두번째 if문은 
+		false값으로 바뀌게 된다.
+		 -->
+		<c:if test="${param.user=='kosmo' && param.pass=='1234' }"
+			var="loginResult">
+			${param.user }님 하이룽~
+		</c:if>
+		<c:if test="${not loginResult}">
+			아이디와 비번을 확인하세요
+		</c:if>
+	</c:if>
 </body>
 </html>
