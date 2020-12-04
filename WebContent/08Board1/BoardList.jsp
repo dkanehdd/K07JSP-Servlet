@@ -236,10 +236,10 @@ else{
 					    정렬
 					</button>
 					<div class="dropdown-menu">
-					    <a class="dropdown-item" href="BoardList.jsp?<%=queryStr %>&sortColumn=title&nowPage=<%=nowPage%>">제목</a>
-					    <a class="dropdown-item" href="BoardList.jsp?<%=queryStr %>&sortColumn=num&nowPage=<%=nowPage%>">날짜</a>
-					    <a class="dropdown-item" href="BoardList.jsp?<%=queryStr %>&sortColumn=visitcount&nowPage=<%=nowPage%>">조회수</a>
-					    <a class="dropdown-item" href="BoardList.jsp?<%=queryStr %>&sortColumn=b.id&nowPage=<%=nowPage%>">아이디</a>
+					    <a class="dropdown-item" href="BoardList.jsp?&sortColumn=title&nowPage=<%=nowPage%>">제목</a>
+					    <a class="dropdown-item" href="BoardList.jsp?&sortColumn=num&nowPage=<%=nowPage%>">날짜</a>
+					    <a class="dropdown-item" href="BoardList.jsp?&sortColumn=visitcount&nowPage=<%=nowPage%>">조회수</a>
+					    <a class="dropdown-item" href="BoardList.jsp?&sortColumn=b.id&nowPage=<%=nowPage%>">아이디</a>
 				  	</div>
 				</div>
 			</div>

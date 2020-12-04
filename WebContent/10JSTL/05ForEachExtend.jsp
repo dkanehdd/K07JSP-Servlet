@@ -69,7 +69,7 @@
 	<!-- set태그를 통해 page영역에 리스트 컬렉션을 저장한다. -->
 	<c:set var="lists" value="<%=lists %>" />
 	
-	<h3>일반 for문 형태이 JSTL의 forEach태그</h3>
+	<h3>일반 for문 형태의 JSTL의 forEach태그</h3>
 	<ul>
 		<c:forEach begin="0" end="${lists.size()-1 }" var="i">
 			<!-- 일반for문 (index)를 사용하므로 배열자체에 []를 사용한다. -->
