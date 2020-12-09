@@ -14,6 +14,8 @@ DAO(Data Access Objeck)
 	M(Model)에 해당한다.
  */
 import java.util.Map;
+
+import controller.DataroomDTO;
 public class MemberDAO {
 	
 	Connection con;//커넥션 객체를 멤버변수로 설정하여 공유
@@ -179,5 +181,27 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return maps;
+	}
+	
+	public int insert(MemberDTO dto) {
+		
+		int affected = 0;
+		try {
+			String sql = "INSERT INTO member ("
+					+ " id, pass, name) "
+					+ " VALUES ("
+					+ " ?,?,?)";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getName());
+			
+			
+			affected = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return affected;
 	}
 }

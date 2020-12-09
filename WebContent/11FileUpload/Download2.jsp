@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%-- 파일명 : Download1.jsp --%>
+<%-- 파일명 : Download2.jsp --%>
 <%
 //한글처리
 request.setCharacterEncoding("UTF-8");

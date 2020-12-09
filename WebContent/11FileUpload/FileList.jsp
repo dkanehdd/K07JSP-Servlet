@@ -46,6 +46,7 @@ File[] fileList = file.listFiles();
 	</ul>
 	
 	<h2>DB에 등록된 파일 리스트 보기</h2>
+	<a href="FileUploadMain.jsp">파일등록하기</a>
 	<%
 	MyFileDTO dto = new MyFileDTO();
 	MyFileDAO dao = new MyFileDAO(application);

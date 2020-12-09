@@ -6,14 +6,14 @@
 		웹사이트제작
 	</div>
 	<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-		<a class="nav-link active" id="v-pills-home-tab"
-			href="../08Board1/BoardList.jsp" role="tab" aria-controls="v-pills-home" aria-selected="true">자유게시판</a>
-		<a class="nav-link" id="v-pills-profile-tab"  
-			href="javascript:alert('준비중');" role="tab" aria-controls="v-pills-profile" aria-selected="false">자료실</a>
-		<a class="nav-link" id="v-pills-messages-tab" 
+		<a class="nav-link btn-light text-primary" id="v-pills-home-tab"
+			href="../08Board1/BoardList.jsp" role="tab" aria-controls="v-pills-home" aria-selected="true" >자유게시판</a>
+		<a class="nav-link btn-light text-primary" id="v-pills-profile-tab"  
+			href="../DataRoom/DataList" role="tab" aria-controls="v-pills-profile" aria-selected="false">자료실</a>
+		<a class="nav-link btn-light text-primary" id="v-pills-messages-tab" 
 			href="javascript:alert('준비중');" role="tab" aria-controls="v-pills-messages" aria-selected="false">방명록</a>				
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+			<a class="nav-link dropdown-toggle btn-light text-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="#">Sub Menu 1</a>
 				<a class="dropdown-item" href="#">Sub Menu 2</a>

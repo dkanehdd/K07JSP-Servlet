@@ -20,7 +20,7 @@
 				<a class="nav-link text-dark" href="../08Board2/BoardList.jsp">회원제게시판2</a>
 			</li> -->
 			<li class="nav-item">
-				<a class="nav-link text-dark" href="javascript:alert('준비중')">자료실</a>
+				<a class="nav-link text-dark" href="../DataRoom/DataList">자료실</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link text-dark" href="javascript:alert('준비중')">방명록</a>
