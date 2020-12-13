@@ -1,10 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RagiFormReview.html</title>
+    <title>RagiForm.jsp</title>
     <!-- 웹폰트 : fonts.google.com 
         jQuery UI : http://jquery.com/
         
@@ -324,7 +325,7 @@
     <div class="AllWrap">
         <h2>회원가입폼</h2>
         <div class="wrap_regiform">
-            <form name="regiform" onsubmit="return isValidate(this);">
+            <form name="regiform" onsubmit="return isValidate(this);" action="../DataRoom/Ragi" method="post">
                 <table class="regi_table">
                     <colgroup>
                         <col width="180px">
@@ -374,7 +375,7 @@
                     </tr>
                     <tr>
                         <td><span class="red">*</span> 휴대폰번호</td>
-                        <td><select>
+                        <td><select name="tel">
                                 <option value="010">010</option>
                                 <option value="011">011</option>
                                 <option value="012">012</option>

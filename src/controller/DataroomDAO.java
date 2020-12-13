@@ -161,9 +161,6 @@ public class DataroomDAO {
 		
 		DataroomDTO dto = null;
 		String sql = "SELECT * FROM dataroom" + 
-//				"    num, title, content, postdate, b.id, visitcount, name  " + 
-//				" FROM member m INNER JOIN board b " + 
-//				"    ON m.id=b.id " + 
 				" WHERE idx=? ";
 		try {
 			psmt = con.prepareStatement(sql);
@@ -258,6 +255,7 @@ public class DataroomDAO {
 		return affected;
 	}
 	
+	//파일 다운로드 횟수 증가
 	public void downCountPlus(String idx) {
 		String sql = "UPDATE dataroom SET "
 				+ " downcount=downcount+1 "

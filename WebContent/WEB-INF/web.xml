@@ -20,11 +20,11 @@
   <!-- 차후 게시판에서 사용할 페이지 번호의 설정값 -->
   <context-param><!-- 한 페이지에 출력할 게시물의 갯수 -->
   	<param-name>PAGE_SIZE</param-name>
-  	<param-value>7</param-value>
+  	<param-value>10</param-value>
   </context-param>
   <context-param><!-- 한 블럭당 출력할 페이지번호의 갯수 -->
   	<param-name>BLOCK_PAGE</param-name>
-  	<param-value>5</param-value>
+  	<param-value>10</param-value>
   </context-param>
   
   <!-- 세션 유지시간 설정하기 : web.xml에서는 '분'단위로 설정된다.-->
@@ -169,9 +169,17 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>DataRoomDownload</servlet-name>
-  	<url-pattern>/Download</url-pattern>
+  	<url-pattern>/DataRoom/Download</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+  	<servlet-name>DataRoomRagi</servlet-name>
+  	<servlet-class>controller.RagiCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DataRoomRagi</servlet-name>
+  	<url-pattern>/DataRoom/Ragi</url-pattern>
+  </servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

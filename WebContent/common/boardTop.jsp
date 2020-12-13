@@ -50,7 +50,7 @@
 			<% if(session.getAttribute("USER_ID")==null){%>
 			<!-- 로그인이 된 상태(글쓰기를 위해 회원인증 후...) -->
 			<li class="nav-item">
-				<a class="nav-link text-dark" href="../08Board1/RagiFormValidate.html">
+				<a class="nav-link text-dark" href="../08Board1/RagiForm.jsp">
 				<i class='fas fa-edit' style='font-size:20px'></i>회원가입</a>
 			</li>
 			<li class="nav-item">

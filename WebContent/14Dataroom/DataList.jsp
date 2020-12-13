@@ -82,14 +82,14 @@
 											<td class="text-center">${map.totalCount - (((map.nowPage-1)*map.pageSize) + loop.index) }
 											</td>
 											<td class="text-left"><a
-												href="../DataRoom/DataView?idx=${row.idx }&nowPage=${param.nowPage}">
+												href="../DataRoom/DataView?idx=${row.idx }&nowPage=${map.nowPage}&searchColumn=${param.searchColumn}&searchWord=${param.searchWord}">
 													${row.title } </a></td>
 											<td class="text-center">${row.name }</td>
 											<td class="text-center">${row.postdate }</td>
 											<td class="text-center">${row.visitcount }</td>
 											<td align="center">
 												<c:if test="${not empty row.attachedfile }">
-												<a href="../Download?filename=${row.attachedfile }&idx=${row.idx}">
+												<a href="./Download?filename=${row.attachedfile }&idx=${row.idx}">
 													<img src="../images/disk.png" width="20" alt="" />
 												</a>
 												</c:if>
@@ -109,7 +109,7 @@
 					<div class="col text-right">
 						<!-- 각종 버튼 부분 -->
 						<button type="button" class="btn btn-primary"
-							onclick="location.href='../DataRoom/DataWrite';">글쓰기</button>
+							onclick="location.href='../DataRoom/DataWrite?nowPage=${map.nowPage}&searchColumn=${param.searchColumn}&searchWord=${param.searchWord}';">글쓰기</button>
 						<!-- <button type="button" class="btn btn-secondary">수정하기</button>
 					<button type="button" class="btn btn-success">삭제하기</button>
 					<button type="button" class="btn btn-info">답글쓰기</button>
@@ -122,10 +122,9 @@
 				<div class="row mt-3">
 					<div class="col">
 						<!-- 페이지번호 기본이미지 -->
-						<div style="text-align: center;padding: 0 0 10px 0;">
-							${map.pagingImg }
-						</div>
-						
+<!-- 						<div style="text-align: center;padding: 0 0 10px 0;"> -->
+<%-- 							${map.pagingImg } --%>
+<!-- 						</div> -->
 						<ul class="pagination justify-content-center">
 							${map.pagingBS4 }
 						</ul>

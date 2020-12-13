@@ -62,7 +62,7 @@
 					<div class="col text-right">
 						<button type="submit" class="btn btn-danger">전송하기</button>
 						<button type="reset" class="btn btn-dark">Reset</button>
-						<button type="button" class="btn btn-warning" onclick="location.href='DataList';">리스트보기</button>
+						<button type="button" class="btn btn-warning" onclick="location.href='DataList?nowPage=${param.nowPage}&searchColumn=${param.searchColumn}&searchWord=${param.searchWord}';">리스트보기</button>
 					</div>
 				</div>
 			</form>

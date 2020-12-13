@@ -12,6 +12,27 @@ public class MemberDTO {
 	private String pass;
 	private String name;
 	private java.sql.Date regidate;
+	private String address;
+	private String email;
+	private String phone;
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	//기본생성자
 /*
  액션태그의 useBean을 통해 폼값을 한꺼번에 받기위해서는

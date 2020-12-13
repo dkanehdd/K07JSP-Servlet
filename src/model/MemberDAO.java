@@ -188,14 +188,16 @@ public class MemberDAO {
 		int affected = 0;
 		try {
 			String sql = "INSERT INTO member ("
-					+ " id, pass, name) "
+					+ " id, pass, name, address, email, phone) "
 					+ " VALUES ("
-					+ " ?,?,?)";
+					+ " ?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getId());
 			psmt.setString(2, dto.getPass());
 			psmt.setString(3, dto.getName());
-			
+			psmt.setString(4, dto.getAddress());
+			psmt.setString(5, dto.getEmail());
+			psmt.setString(6, dto.getPhone());
 			
 			affected = psmt.executeUpdate();
 		}

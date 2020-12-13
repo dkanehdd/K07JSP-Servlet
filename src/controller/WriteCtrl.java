@@ -60,8 +60,17 @@ public class WriteCtrl extends HttpServlet{
 			
 			//DAO객체생성 및 연결 ...insert처리
 			DataroomDAO dao = new DataroomDAO();
+			
 			//파일업로드 성공 및 insert성공시
 			sucOrFail = dao.insert(dto);
+			/*
+			페이지처리를 위한 100개 데이터입력
+			 */
+//			sucOrFail =1;
+//			for(int i=1 ; i<=100 ; i++) {
+//				dto.setTitle("자료실"+i+"번째 포스팅");
+//				dao.insert(dto);
+//			}
 			
 			dao.close();
 		}

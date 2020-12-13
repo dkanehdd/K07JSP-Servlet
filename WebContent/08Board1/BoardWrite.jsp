@@ -98,7 +98,6 @@ request.getParameter("nowPage").equals("")) ?
 				</div>
 			</form>
 			
-				
 		<!-- ### 게시판의 body 부분 end ### -->	
 		</div>
 	</div>

@@ -12,7 +12,7 @@
 String queryStr="";
 String searchColumn = request.getParameter("searchColumn");
 String searchWord = request.getParameter("searchWord");
-if(searchWord!=null){
+if(searchWord!=null&&!searchWord.equals("")){
 	queryStr += "searchColumn="+searchColumn
 			+"&searchWord="+searchWord;
 }
