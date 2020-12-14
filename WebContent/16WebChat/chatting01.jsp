@@ -29,7 +29,7 @@
 	<script>
 	/*
 	JS의 WebSocket객체를 이용해서 웹소켓 서버에 연결한다.
-	웹소켓이므로 wd:// 로시작한다. 마지막 경로에는 @ServerEndPoint어노테이션으로
+	웹소켓이므로 ws:// 로시작한다. 마지막 경로에는 @ServerEndPoint어노테이션으로
 	지정했던 요청명을 사용한다.
 	*/
 	var webSocket = new WebSocket("ws://localhost:8080/K07JSPServlet/ChatServer01");
