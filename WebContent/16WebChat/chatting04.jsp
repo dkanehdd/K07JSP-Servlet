@@ -23,7 +23,7 @@
 	</header>		
 	<input type="hidden" id="chat_id" value="${param.chat_id }" style="border:1px dotted red;" />
 	<div id="chat-container" class="chat-area" style="height:500px;overflow:auto;">
-<!-- 		<!-- 왼쪽 채팅 --> -->
+<!-- 		<!-- 왼쪽 채팅 -->
 <!-- 		<div class="chat chat-left">			 -->
 <!-- 			<span class="profile profile-img-b"></span> -->
 <!-- 			<div class="chat-box"> -->
@@ -32,7 +32,7 @@
 <!-- 				<span class="bubble-tail"></span> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
-<!-- 		<!-- 오른쪽 채팅 --> -->
+<!-- 		<!-- 오른쪽 채팅 -->
 <!-- 		<div class="chat chat-right">			 -->
 <!-- 			<span class="profile profile-img-a"></span> -->
 <!-- 			<div class="chat-box">				 -->
@@ -63,7 +63,7 @@ window.onload = function(){
 	//대화영역의 스크롤바를 항상 아래로 내려준다.
 	/*
 	JS의 scroll 속성
-		DOM객체.scrollTop = 해당 DOM객체의 세로스크롤의 픽셀을반환하거나 설정
+		DOM객체.scrollTop = 해당 DOM객체의 현제 세로스크롤의 위치를 픽셀을반환하거나 설정
 		DOM객체.scrollHeight = 스크롤의 세로길이를 반환
 	*/
 	messageWindow.scrollTop = messageWindow.scrollHeight;
@@ -72,7 +72,7 @@ window.onload = function(){
 	//채팅아이디
 	chat_id = document.getElementById('chat_id').value;
 	//로컬호스트부분에 IP주소를 입력해서 서버에 접속할수 있다.
-	//webSocket = new WebSocket('ws://192.168.219.115:9999/K07JSPServlet/ChatServer02');
+	//낙자썜 IP : webSocket = new WebSocket('ws://192.168.219.115:9999/K07JSPServlet/ChatServer02');
 	webSocket = new WebSocket("ws://localhost:8080/K07JSPServlet/ChatServer02");
 	
 	webSocket.onopen = function(event) {
@@ -98,7 +98,7 @@ function wsError(event){
 	alert(event.data);
 }
 //채팅룸의 sendAllMessage메소드 같은 부분
-//클라이언트가 메세지를 입력후 '보내기'버튼을 누를때 호출
+//클라이언트가 보낸메세지를 서버에서 처리후 다른 클라이언트들에게 뿌려주는 부분
 function wsMessage(event){
 	var message = event.data.split("|");
 	var sender = message[0];
@@ -123,6 +123,7 @@ function wsMessage(event){
 		}
 		else{
 			//귓속말이 아니면 모두에게 디스플레이한다.
+			//각 클라이언트마다 반복하면서 
 			msg = makeBalloon(sender, content);
 			messageWindow.innerHTML += msg;
 			//대화영역의 스크롤바를 항상 아래로 내려준다.
@@ -130,7 +131,7 @@ function wsMessage(event){
 		}
 	}
 }
-//상대방이 보낸 메세지를 출력하기 위한 부분
+//상대방이 보낸 메세지를 대화창에 왼쪽에 UI를 적용시켜 반환 해주는 메소드
 function makeBalloon(id, cont) {
 	var msg = '';
 	msg += '<div class="chat chat-left">';			

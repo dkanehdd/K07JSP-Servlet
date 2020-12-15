@@ -30,6 +30,11 @@ public class SMTPAuth extends Authenticator{
 		boolean sendOk = false;
 		
 		//정보를 담을 객체
+		/*
+		Properties
+			: HashTable 컬렉션을 상속받아 구현한 컬렉션의 한 종류
+			동기화 보장, 파일 입출력을할수 있따.
+		 */
 		Properties p = new Properties();
 		
 		// SMTP 서버에 접속하기 위한 정보들
@@ -48,8 +53,8 @@ public class SMTPAuth extends Authenticator{
 			
 			ses.setDebug(true);
 			
-			//제목
 			MimeMessage msg = new MimeMessage(ses);
+			//제목
 			msg.setSubject(map.get("subject"));
 			//보내는사람 메일
 			Address fromAddr = new InternetAddress(map.get("from"));
