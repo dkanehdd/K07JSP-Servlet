@@ -73,7 +73,7 @@ window.onload = function(){
 	chat_id = document.getElementById('chat_id').value;
 	//로컬호스트부분에 IP주소를 입력해서 서버에 접속할수 있다.
 	//낙자썜 IP : webSocket = new WebSocket('ws://192.168.219.115:9999/K07JSPServlet/ChatServer02');
-	webSocket = new WebSocket("ws://localhost:8080/K07JSPServlet/ChatServer02");
+	webSocket = new WebSocket("ws://localhost:9999/K07JSPServlet/ChatServer02");
 	
 	webSocket.onopen = function(event) {
 		wsOpen(event);

@@ -32,7 +32,7 @@
 	웹소켓이므로 wd:// 로시작한다. 마지막 경로에는 @ServerEndPoint어노테이션으로
 	지정했던 요청명을 사용한다.
 	*/
-	var webSocket = new WebSocket("ws://localhost:8080/K07JSPServlet/ChatServer01");
+	var webSocket = new WebSocket("ws://localhost:9999/K07JSPServlet/ChatServer01");
 	
 	//대화입력창/출력창의 DOM을 가져온다.
 	var messageWindow = document.getElementById("messageWindow");
