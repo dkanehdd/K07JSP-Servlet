@@ -44,6 +44,7 @@ public class ChatServer02 {
 		System.out.println("종료되었습니다.");
 	}
 	//클라이언트가 보낸 메세지를 받을때...
+	//JS에서 webSocket.send()를 하면 여기서 받음
 	@OnMessage
 	public void onMessage(String message, Session session) throws IOException{
 		System.out.println(session.getId()+":"+message);

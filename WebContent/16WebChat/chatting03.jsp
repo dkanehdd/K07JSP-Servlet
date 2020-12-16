@@ -25,14 +25,14 @@
 		style="border: 1px dotted red; width: 200px;" />
 	<fieldset style="width: 350px; text-align: center;">
 		<legend>채팅창</legend>
+		<!-- 대화출력창 -->
+		<textarea id="messageWindow"
+			style="width: 300px; height: 400px; margin-top: 10px;" readonly></textarea>
 		<!-- 대화입력창 -->
 		<input type="text" id="inputMessage"
 			style="width: 300px; margin-bottom: 5px;" /> <br /> <input
 			type="button" onclick="sendMessage();" value="보내기" /> <input
 			type="button" onclick="disconnect();" value="채팅종료" /> <br />
-		<!-- 대화출력창 -->
-		<textarea id="messageWindow"
-			style="width: 300px; height: 400px; margin-top: 10px;" readonly></textarea>
 	</fieldset>
 	<script>
 	//대화가 디스플레이 되는 영역
