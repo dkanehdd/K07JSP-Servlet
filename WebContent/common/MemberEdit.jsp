@@ -147,8 +147,8 @@
             //날짜선택을 편리하게 - Date Picker
             $("#birthday").datepicker({
                 dateFormat: "yy-mm-dd",
-                	changeMonth: true,
-                    changeYear: true
+                changeMonth: true,
+                changeYear: true
             });
         });
     </script>
@@ -327,19 +327,14 @@
     <div class="AllWrap">
         <h2>회원가입폼</h2>
         <div class="wrap_regiform">
-            <form name="regiform" onsubmit="return isValidate(this);" action="../DataRoom/Ragi" method="post">
+            <form name="regiform" onsubmit="return isValidate(this);" action="./MEditCtrl" method="post">
+                <input type="hid`den" value="${param.user_id }"
+                	name="user_id"/>
                 <table class="regi_table">
                     <colgroup>
                         <col width="180px">
                         <col width="*">
                     </colgroup>
-                    <tr>
-                        <td><span class="red">*</span> 아이디</td>
-                        <td>
-                            <input type="text" class="w01" name="userid" value="" maxlength="12" />
-                            <button type="button" onclick="checkId();">중복확인</button>
-                        </td>
-                    </tr>
                     <tr>
                         <td><span class="red">*</span> 패스워드</td>
                         <td>
@@ -356,18 +351,6 @@
                             <span id="pw2" hidden> *비밀번호가 일치하지 않습니다</span>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td><span class="red">*</span> 이름</td>
-                        <td>
-                            <input type="text" class="w01" name="name" value="" />
-                            <label for="radio-1">남</label>
-                            <input type="radio" name="gender" id="radio-1" checked>
-                            <label for="radio-2">여</label>
-                            <input type="radio" name="gender" id="radio-2">
-                        </td>
-                    </tr>
-
                     <tr>
                         <td><span class="red">*</span> 생년월일</td>
                         <td style="padding: 0px 0 5px 5px;">
@@ -384,9 +367,9 @@
                                 <option value="013">013</option>
                             </select> -
                             <input type="text" maxlength="4" style="width: 80px;" name="tel1"
-                                onkeyup="commonFocusMove(this, 4, 'tel2');"> -
+                                onkeyup="commonFocusMove(this, 4, 'tel2');" value="${maps.tel1 }"> -
                             <input type="text" id="tel2" maxlength="4" style="width: 80px;" name="tel2"
-                                onkeyup="commonFocusMove(this, 4, 'addr1');">
+                                onkeyup="commonFocusMove(this, 4, 'addr1');" value="${maps.tel2 }">
                         </td>
                     </tr>
                     <tr>
@@ -407,8 +390,9 @@
                     </tr>
                     <tr>
                         <td><span class="red">*</span> 이메일</td>
-                        <td><input type="text" name="email1" style="width: 150px;"> @
-                            <input type="text" style="width: 150px;" id="domain" name="email2" onblur="emailCheck();">
+                        <td><input type="text" name="email1" style="width: 150px;" value="${maps.email1 }"> @
+                            <input type="text" style="width: 150px;" id="domain" name="email2" onblur="emailCheck();"
+                            	value="${maps.email2 }">
                             <select onchange="emailSelect(this);">
                                 <option value="">직접입력</option>
                                 <option value="naver.com">naver.com</option>
@@ -423,7 +407,7 @@
                         <td><div style="text-align: right;padding-right: 120px;"> ※ 이메일 형식이 잘못되었습니다.</div></td>
                     </tr>
                 </table>
-                <div style="text-align: center;"><button type="submit" id="sub">회원가입완료</button></div>
+                <div style="text-align: center;"><button type="submit" id="sub">수정하기</button></div>
             </form>
         </div>
     </div>

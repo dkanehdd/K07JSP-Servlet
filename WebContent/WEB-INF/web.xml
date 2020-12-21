@@ -180,6 +180,25 @@
   	<servlet-name>DataRoomRagi</servlet-name>
   	<url-pattern>/DataRoom/Ragi</url-pattern>
   </servlet-mapping>
+  <!-- 회원정보수정 -->
+  <servlet>
+  	<servlet-name>MemberEdit</servlet-name>
+  	<servlet-class>controller.MemberEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MemberEdit</servlet-name>
+  	<url-pattern>/DataRoom/MemberEdit</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>MEditCtrl</servlet-name>
+  	<servlet-class>controller.MEditCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MEditCtrl</servlet-name>
+  	<url-pattern>/DataRoom/MEditCtrl</url-pattern>
+  </servlet-mapping>
+  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

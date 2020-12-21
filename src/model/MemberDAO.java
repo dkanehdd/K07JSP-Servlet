@@ -206,4 +206,59 @@ public class MemberDAO {
 		}
 		return affected;
 	}
+	
+	public Map<String, String> getMember(String id){
+		
+		//회원정보를 저장할 Map컬렉션 생성
+		Map<String, String> maps = new HashMap<String, String>();
+		
+		String query = "SELECT * FROM member"
+				+ " where id=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			//회원정보가 있다면 put()을 통해 정보를 저장한다.
+			if(rs.next()) {
+				maps.put("id", rs.getString("id"));
+				maps.put("pass",rs.getString("pass"));
+				maps.put("email",rs.getString("email"));
+				maps.put("address",rs.getString("address"));
+				maps.put("phone",rs.getString("phone"));
+				maps.put("name", URLDecoder.decode(rs.getString("name"),"UTF-8"));
+				
+			}
+			else {
+				System.out.println("결과셋이 없습니다.");
+			}
+			
+		}
+		catch (Exception e) {
+			System.out.println("getMemberMap오류");
+			e.printStackTrace();
+		}
+		return maps;
+	}
+	
+	public int updateMember(MemberDTO dto) {
+		int affected =0;
+		String sql = "update member set phone=?, email=?, "
+				+" pass=?, address=? " 
+				+" where id=?";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getPhone());
+			psmt.setString(2, dto.getEmail());
+			psmt.setString(3, dto.getPass());
+			psmt.setString(4, dto.getAddress());
+			psmt.setString(5, dto.getId());
+			
+			affected = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return affected;
+	}
 }

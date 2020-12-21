@@ -25,7 +25,6 @@
 								<option value="title">제목</option>
 								<option value="content">내용</option>
 								<option value="name">작성자</option>
-								<option value="b.id">아이디</option>
 							</select>
 						</div>
 						<div class="input-group">
