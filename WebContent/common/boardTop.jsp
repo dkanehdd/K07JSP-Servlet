@@ -58,7 +58,7 @@
 			</li>
 			<%} else{ %>
 			<li class="nav-item">
-				<a class="nav-link text-dark" href="#" onclick="alert('준비중')">
+				<a class="nav-link text-dark" href="../DataRoom/MemberEdit?user_id=<%=session.getAttribute("USER_ID") %>">
 				<i class='fa fa-cogs' style='font-size:20px'></i>회원정보수정</a>
 			</li>
 			<li class="nav-item">
