@@ -122,9 +122,9 @@
 			EL에서는 영역에 접근할때 xxScope계열의 내장객체를 사용한다.
 			pageContext는 JSP에서 사용하는 내장객체이므로 에러가 발생한다.
 			 -->
-			<li>\${pageContext.nop } : \${pageContext.nop }
-				[컴파일오류발생 -> 내장객체명은 정해져 있기때문]
-			</li>
+<%-- 			<li>\${pageContext.nop } : \${pageContext.nop } --%>
+<!-- 				[컴파일오류발생 -> 내장객체명은 정해져 있기때문] -->
+<!-- 			</li> -->
 		</ul>
 		
 		<h2>EL의 내장객체중 사용자가 정의한 속성에 접근하는 내장객체 및 맵 컬렉션인 경우</h2>
@@ -144,7 +144,7 @@
 		</ul>
 		
 		<h2>숫자를 0으로 나누면 INFINITE</h2>
-		\${10 div 0 } : ${10 div 0 }
+<%-- 		\${10 div 0 } : ${10 div 0 } --%>
 		
 		<h2>EL변수에 값 할당시 [톰켓 8.0부터는 정상. 이전버전은 에러]</h2>
 		<c:set var="number" value="100" scope="request"/>
