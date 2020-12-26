@@ -422,6 +422,9 @@
                         <td></td>
                         <td><div style="text-align: right;padding-right: 120px;"> ※ 이메일 형식이 잘못되었습니다.</div></td>
                     </tr>
+                    <tr>
+                    	<td><input type="checkbox" name="check"/>체크</td>
+                    </tr>
                 </table>
                 <div style="text-align: center;"><button type="submit" id="sub">회원가입완료</button></div>
             </form>

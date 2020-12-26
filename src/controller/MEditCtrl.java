@@ -18,6 +18,7 @@ req.setCharacterEncoding("UTF-8");
 		String pw = req.getParameter("pw1");
 		String email = req.getParameter("email1")
 				+"@"+req.getParameter("email2");
+		
 		String phone = req.getParameter("tel")+"-"
 				+req.getParameter("tel1")+"-"
 				+req.getParameter("tel2");
