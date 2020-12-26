@@ -12,7 +12,7 @@ String id_save = request.getParameter("id_save");
 //web.xml에 저장된 컨텍스트 초기화 파라미터 가져옴
 String drv = application.getInitParameter("JDBCDriver");
 String url = application.getInitParameter("ConnectionURL");
-
+System.out.println(id_save);
 //DAO객체 생성 및 DB연결
 MemberDAO dao = new MemberDAO(drv, url);
 

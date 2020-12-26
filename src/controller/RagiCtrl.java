@@ -22,6 +22,8 @@ public class RagiCtrl extends HttpServlet{
 		String name = req.getParameter("name");
 		String email = req.getParameter("email1")
 				+"@"+req.getParameter("email2");
+		String check = req.getParameter("check");
+		System.out.println(check);
 		String phone = req.getParameter("tel")+"-"
 				+req.getParameter("tel1")+"-"
 				+req.getParameter("tel2");

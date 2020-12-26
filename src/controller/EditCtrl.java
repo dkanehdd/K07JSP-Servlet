@@ -24,7 +24,7 @@ public class EditCtrl extends HttpServlet{
 		해당 내장객체는 DAO로 전달하여 초기화파라미터를 얻어오게 된다.
 		 */
 		ServletContext app = this.getServletContext();
-		DataroomDAO dao = new DataroomDAO(app);
+		DataroomDAO dao = new DataroomDAO();
 		
 		//수정폼을 구성하기 위해 게시물의 내용을 가져온다.
 		DataroomDTO dto = dao.selectView(idx);
@@ -78,7 +78,7 @@ public class EditCtrl extends HttpServlet{
 			dto.setIdx(idx);
 			
 			ServletContext app = this.getServletContext();
-			DataroomDAO dao = new DataroomDAO(app);
+			DataroomDAO dao = new DataroomDAO();
 			sucOrFail = dao.update(dto);
 			
 			/*
