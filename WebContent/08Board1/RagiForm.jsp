@@ -409,7 +409,7 @@
                         <td><span class="red">*</span> 이메일</td>
                         <td><input type="text" name="email1" style="width: 150px;"> @
                             <input type="text" style="width: 150px;" id="domain" name="email2" onblur="emailCheck();">
-                            <select onchange="emailSelect(this);">
+                            <select onchange="emailSelect(this);" >
                                 <option value="">직접입력</option>
                                 <option value="naver.com">naver.com</option>
                                 <option value="daum.net">daum.net</option>
